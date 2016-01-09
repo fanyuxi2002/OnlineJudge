@@ -662,6 +662,8 @@ pre code:before,pre code:after,pre tt:before,pre tt:after {
 <body>
 <h1>安装说明</h1>
 
+<p>OnlineJudge 只能在 Linux 安装，只要能安装 Docker 就可以。以下安装说明基于 Ubuntu。</p>
+
 <p>首先选择一下安装目录，我选择的是<code>/home/</code>下，下面的操作不加特殊说明的话，都是相对这个目录的。</p>
 
 <p>如果不是 root 用户，下面的命令需要的自行添加 sudo。</p>
@@ -708,17 +710,15 @@ mysql               latest              ea0aca21950d        3 weeks ago         
 
 <p>首先要启动 MySQL 和 Redis 的 container, 分别命名为 mysql 和 redis。因为 MySQL 和 Redis 的数据文件需要持久化, 可以使用 <code>-v</code> 参数进行目录映射。</p>
 
-<p>我们使用/home/data/mysql 和 /home/data/redis 来存放数据文件, 先创建这两个文件夹</p>
+<p>我们使用 <code>/home/data/mysql</code> 和 <code>/home/data/redis</code> 来存放数据文件, 先创建这两个文件夹</p>
 
 <pre><code>mkdir -p /home/data/mysql /home/data/redis
 </code></pre>
 
-<p>启动 MySQL 的命令</p>
+<p>启动 MySQL 的命令，里面的 <code>{PASSWORD}</code> 是数据库密码，请自行修改。</p>
 
 <pre><code>docker run --name mysql -v /home/data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD={PASSWORD} -d mysql
 </code></pre>
-
-<p>里面的 <code>{PASSWORD}</code> 是数据库密码，请自行修改。</p>
 
 <p>启动 Redis 的命令</p>
 
@@ -734,9 +734,12 @@ mysql               latest              ea0aca21950d        3 weeks ago         
 
 <h2>创建数据库</h2>
 
-<p>接下来创建数据库，上一步可以看到 mysql 的 container id，运行<code>docker exec -i -t {CONTAINER ID} /bin/bash</code></p>
+<p>接下来创建数据库，上一步可以看到 mysql 的 container id，运行</p>
 
-<p>然后 <code>mysql -u root -p</code>，输入刚才的密码，然后执行下面两条 sql 语句，创建 oj 和 submission 数据库。</p>
+<pre><code>docker exec -i -t {CONTAINER ID} /bin/bash
+</code></pre>
+
+<p>运行 <code>mysql -u root -p</code>，输入刚才的密码，执行下面两条 sql 语句，创建 oj 和 oj_submission 数据库。</p>
 
 <pre><code>create database oj default character set utf8;
 create database oj_submission default character set utf8;
@@ -767,10 +770,10 @@ create database oj_submission default character set utf8;
 
 <p><code>docker ps -a</code> 可以看到这个容器是 running，然后复制 container id</p>
 
-<p>运行
-<code>
-docker exec -i -t {CONTAINER ID} /bin/bash
-</code></p>
+<p>运行</p>
+
+<pre><code>docker exec -i -t {CONTAINER ID} /bin/bash
+</code></pre>
 
 <p>然后容器中运行</p>
 
@@ -786,9 +789,9 @@ python manage.py migrate --database=submission
 &gt;&gt;&gt; user.save()
 </code></pre>
 
-<p>这样就创建了账号和密码都是root 超级管理员。</p>
+<p>这样就创建了账号和密码都是 <code>root</code> 超级管理员。</p>
 
-<p>然后运行<code>python tools/release_static.py</code>，会生成压缩版的js，可能会比较慢，耐心等候。</p>
+<p>运行 <code>python tools/release_static.py</code>，会生成压缩版的js，可能会比较慢，耐心等候。</p>
 
 <h2>配置nginx</h2>
 
@@ -821,6 +824,8 @@ python manage.py migrate --database=submission
 <h2>server安装成功</h2>
 
 <p>如果可以访问了,请在 <code>/login/</code> 处登录 root 用户,然后访问 <code>/admin/</code> 添加一道题目试试吧。但是现在还不能判题。</p>
+
+<p>如果出现错误，请先<code>docker ps -a</code>查看所有的容器是否在正常运行，如果出现错误，使用<code>docker logs {CONTAINER ID}</code>可以查看日志。在<code>/home/log/</code>中也可以看有没有错误。</p>
 
 <h2>配置判题</h2>
 
