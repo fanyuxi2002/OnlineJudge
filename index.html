@@ -772,11 +772,11 @@ create database oj_submission default character set utf8;
 docker exec -i -t {CONTAINER ID} /bin/bash
 </code></p>
 
-<p>然后容器中运行
-<code>
-python manage.py migrate
+<p>然后容器中运行</p>
+
+<pre><code>python manage.py migrate
 python manage.py migrate --database=submission
-</code></p>
+</code></pre>
 
 <p>执行完后运行 <code>python manage.py shell</code>，输入下面的命令创建管理员</p>
 
