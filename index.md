@@ -101,6 +101,8 @@ mkdir -p /home/test_case /home/log /home/upload
 chown -R nobody:nogroup /home/test_case /home/log /home/upload
 ```
 
+然后复制 `oj/custom_settings.example.py` 为 `oj/custom_settings.py`，里面有一些个性化配置，比如网站名称域名等，可以先保持默认，以后再修改。
+
 启动 `oj_web_server` 的命令如下
 
 ```
@@ -186,3 +188,6 @@ docker run --privileged=true -v /home/OnlineJudge:/var/judger/code  -v /home/tes
 
 #高级配置
 todo
+
+
+
