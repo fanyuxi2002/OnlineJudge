@@ -1007,7 +1007,7 @@ python manage.py migrate --database=submission
 
 <p>运行</p>
 
-<pre><code>docker run --privileged=true -v /home/OnlineJudge:/var/judger/code  -v /home/test_case:/var/judger/test_case -v /home/log:/var/judger/code/judge/log -e rpc_token={rpc_token} -p 0.0.0.0:8085:8080 -d judger
+<pre><code>docker run -v /home/OnlineJudge:/var/judger/code  -v /home/test_case:/var/judger/test_case -v /home/log:/var/judger/code/judge/log -e rpc_token={rpc_token} -p 0.0.0.0:8085:8080 -d judger
 </code></pre>
 
 <p>其中 <code>{rpc_token}</code> 自行修改，后面会用到。</p>
