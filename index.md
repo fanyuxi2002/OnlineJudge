@@ -177,7 +177,7 @@ server {
 运行
 
 ```
-docker run --privileged=true -v /home/OnlineJudge:/var/judger/code  -v /home/test_case:/var/judger/test_case -v /home/log:/var/judger/code/judge/log -e rpc_token={rpc_token} -p 0.0.0.0:8085:8080 -d judger
+docker run -v /home/OnlineJudge:/var/judger/code  -v /home/test_case:/var/judger/test_case -v /home/log:/var/judger/code/judge/log -e rpc_token={rpc_token} -p 0.0.0.0:8085:8080 -d judger
 ```
 
 其中 `{rpc_token}` 自行修改，后面会用到。
