@@ -869,7 +869,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 <h2 id="toc_3">build 需要的镜像</h2>
 
-<p>以下操作可能需要很长时间，主要取决于您的网络状况，如果卡在 pull 镜像的过程中，可以尝试设置代理或者使用 <a href="https://dashboard.daocloud.io/mirror">daocloud 的镜像</a>。</p>
+<p>以下操作可能需要很长时间，主要取决于您的网络状况，如果卡在 pull 镜像的过程中，可以尝试设置代理或者使用 <a href="https://dashboard.daocloud.io/mirror">DaoCloud 的镜像</a>。</p>
 
 <p>build 镜像需要 Dockerfile，有两个，一个是 <code>oj_web_server</code>，另一个是判题用 <code>judger</code>。</p>
 
@@ -911,11 +911,11 @@ ubuntu              14.04               3876b81b5a81        3 weeks ago         
 <li><code>/home/upload</code> 上传的图片等</li>
 </ul>
 
-<p>请自行创建相关的文件夹。然后 <code>chown -R nobody:nogroup /home/test_case /home/log /home/upload</code></p>
+<p>请自行创建相关的文件夹。</p>
 
 <h2 id="toc_5">配置 docker-compose</h2>
 
-<p>Docker Compose是在使用Docker容器部署分布式应用时的工具，可以定义哪个容器运行哪个应用。使用Compose，你只需定义一个多容器应用的yml文件，然后使用一条命令即可部署运行所有容器。</p>
+<p>Docker Compose 是在使用 Docker 容器部署分布式应用时的工具，可以定义哪个容器运行哪个应用。使用Compose，你只需定义一个多容器应用的yml文件，然后使用一条命令即可部署运行所有容器。</p>
 
 <p>下面是一个 <code>docker-compose.yml</code> 的例子<br/>
 先解释下部分参数</p>
@@ -1050,7 +1050,7 @@ python manage.py initadmin
 
 <p>其中 <code>{rpc_token}</code> 自行修改，后面会用到。</p>
 
-<p><code>docker ps -a</code>可以看到 judger 容器的 CONTAINER ID，复制出来，运行<code>docker inspect {CONTAINER ID}</code>，里面有一行是 IPAddress，记住这个 ip。</p>
+<p><code>docker ps -a</code> 可以看到 judger 容器的 CONTAINER ID，复制出来，运行 <code>docker inspect {CONTAINER ID}</code>，里面有一行是 IPAddress，记住这个 ip。</p>
 
 <p>在 admin 界面 <code>判题服务器</code> tab 里面，填写 ip、token 和端口8080，创建一个判题服务器就好了。</p>
 
